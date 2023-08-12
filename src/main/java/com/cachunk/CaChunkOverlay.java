@@ -43,7 +43,7 @@ public class CaChunkOverlay extends OverlayPanel {
     public Dimension render(Graphics2D graphics) {
         int unlockedChunks = plugin.getChunkUnlockCount();
         int caPoints = plugin.getCAPoints();
-        int availableChunks = caPoints - unlockedChunks;
+        int availableChunks = caPoints - unlockedChunks + config.startingChunks();;
 
         panelComponent.getChildren().add(LineComponent.builder()
                 .left(UNLOCKED_CHUNKS_STRING)
@@ -75,7 +75,7 @@ public class CaChunkOverlay extends OverlayPanel {
     }
 
     private Color getTextColor() {
-        if (plugin.getCAPoints() < plugin.getChunkUnlockCount()){
+        if ((plugin.getCAPoints() + config.startingChunks()) < plugin.getChunkUnlockCount()){
             return Color.RED;
         }
         return Color.WHITE;
